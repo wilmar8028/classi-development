@@ -1,6 +1,6 @@
 #
 #
-#   classi Raspberry Pi Installation Script
+#   classi Installation Script for Raspberry Pi
 #
 #
 
