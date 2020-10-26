@@ -7,7 +7,6 @@
 # Default values of arguments
 SHOULD_INITIALIZE=0
 INSTALLATION_DIRECTORY="/var/www/html"
-OTHER_ARGUMENTS=()
 
 # Loop through arguments and process them
 for arg in "$@"
