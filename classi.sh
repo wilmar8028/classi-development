@@ -128,9 +128,11 @@ done
 
     if [ $INSTALL_CLASSI = 1 ] then
       echo -e "\n*****\n\nInstalling classi now...\n\n*****\n"
-      cd $INSTALLATION_DIRECTORY
       git clone https://github.com/lincolnthedev/classi
-      cd ~
+      
+      sudo mv index.php $INSTALLATION_DIRECTORY
+      sudo mv head.php $INSTALLATION_DIRECTORY
+      
       cat .bash_aliases alias classi='./classi.sh -i'
       cat .bash_aliases alias classi-update='./classi.sh'
       figlet -f slant "classi"
