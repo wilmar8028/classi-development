@@ -6,7 +6,7 @@
 
 # Default values of arguments
 SHOULD_INITIALIZE=0
-INSTALLATION_DIRECTORY="~"
+INSTALLATION_DIRECTORY="/var/www/html"
 OTHER_ARGUMENTS=()
 
 # Loop through arguments and process them
@@ -77,20 +77,25 @@ if [ $CONTINUE = 1 ] then
 
   echo -e "*** Installing Git ***"
   sleep 1
-  apt update
-  apt install git
+  sudo apt update
+  sudo apt install git
   clear
   
   echo -e "*** Installing PHP ***"
   sleep 1
-  apt update
-  apt install php
+  sudo apt update
+  sudo apt install php-fpm
   clear
 
   echo -e "*** Installing NGINX ***"
   sleep 1
-  apt update
-  apt install nginx
+  sudo apt update
+  sudo apt install nginx
+  clear
+
+  echo -e "*** Activating NGINX ***"
+  sleep 1
+  sudo /etc/init.d/nginx start
   clear
 
   echo -e "*** Setting Hostname ***"
@@ -123,10 +128,11 @@ done
 
     if [ $INSTALL_CLASSI = 1 ] then
       echo -e "\n*****\n\nInstalling classi now...\n\n*****\n"
-      mv $INSTALLATION_DIRECTORY
-      #git clone <REPO URL HERE>
-      cat .bash_aliases alias classi='cd $INSTALLATION_DIRECTORY && ./classi.sh -i'
-      cat .bash_aliases alias classi-update='cd $INSTALLATION_DIRECTORY && ./classi.sh'
+      cd $INSTALLATION_DIRECTORY
+      git clone https://github.com/lincolnthedev/classi
+      cd ~
+      cat .bash_aliases alias classi='./classi.sh -i'
+      cat .bash_aliases alias classi-update='./classi.sh'
       figlet -f slant "classi"
       echo -e "\nInstallation Complete! Thank you for using classi!"
       sleep 5
@@ -149,8 +155,9 @@ fi
 if [ $SHOULD_INITIALIZE = 0 ] then
 
 echo -e "\n*****\n\nUpdating classi now...\n\n*****\n"
-mv $INSTALLATION_DIRECTORY
-#git pull <REPO URL HERE>
+cd $INSTALLATION_DIRECTORY
+git pull https://github.com/lincolnthedev/classi
+cd ~
 figlet -f slant "classi"
 echo -e "\nUpdate Complete! Thank you for using classi!"
 sleep 5
