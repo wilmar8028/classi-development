@@ -7,6 +7,7 @@
 # Default values of arguments
 SHOULD_INITIALIZE=0
 INSTALLATION_DIRECTORY="/var/www/html"
+CONTINUE=1
 
 # Loop through arguments and process them
 for arg in "$@"
@@ -31,7 +32,7 @@ then
 while true; do
   read -p "You selected initialization mode. This could potentially cause errors if you already ran it. Have you run this installation before? Answer u to just update classi. (y/u/n): " yn
   case $yn in
-      [Yy]* ) CONTINUE=1;echo -e "/nGreat! Continuing with the initialization and installation process now...";sleep 2;clear;;
+      [Yy]* ) echo -e "/nGreat! Continuing with the initialization and installation process now...";sleep 2;clear;;
       [Nn]* ) clear;exit 1;;
       [Uu]* ) CONTINUE=0;SHOULD_INITIALIZE=0;clear;;
       * ) echo "Please answer y/u/n";;
