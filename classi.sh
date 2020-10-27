@@ -32,15 +32,13 @@ then
 while true; do
   read -p "You selected initialization mode. This could potentially cause errors if you already ran it. Have you run this installation before? Answer u to just update classi. (y/u/n): " yn
   case $yn in
-      [Yy]* ) echo -e "/nGreat! Continuing with the initialization and installation process now...";sleep 2;clear;;
-      [Nn]* ) clear;exit 1;;
-      [Uu]* ) CONTINUE=0;SHOULD_INITIALIZE=0;clear;;
+      [Nn]* ) echo "Great! Continuing with the initialization and installation process now...";sleep 2;clear;;
+      [Yy]* ) clear;exit 1;;
       * ) echo "Please answer y/u/n";;
   esac
 done
 
-if [ $CONTINUE = 1 ]
-then
+
 
 	echo -e "
   ***********************
@@ -149,7 +147,6 @@ fi
       exit 1
     fi
 
-fi
 fi
 
 
