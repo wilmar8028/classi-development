@@ -24,7 +24,8 @@ do
     esac
 done
 
-if [ $SHOULD_INITIALIZE = 1 ] then
+if [ $SHOULD_INITIALIZE = 1 ]
+then
 
 
 while true; do
@@ -37,7 +38,8 @@ while true; do
   esac
 done
 
-if [ $CONTINUE = 1 ] then
+if [ $CONTINUE = 1 ]
+then
 
 	echo -e "
   ***********************
@@ -121,7 +123,8 @@ done
 
 
 
-if [ $INSTALL_CLASSI = 1 ] then
+if [ $INSTALL_CLASSI = 1 ]
+then
       echo -e "\n*****\n\nInstalling classi now...\n\n*****\n"
       git clone https://github.com/lincolnthedev/classi
       
@@ -137,7 +140,8 @@ if [ $INSTALL_CLASSI = 1 ] then
       exit 1
 fi
 
-    if [ $INSTALL_CLASSI = 0 ] then
+    if [ $INSTALL_CLASSI = 0 ]
+    then
       echo -e "\n*****\n\nOK, not installing classi now. Please note: you may want to install it later.\n\n*****\n"
       sleep 5
       clear
@@ -149,7 +153,8 @@ fi
 
 
 
-if [ $SHOULD_INITIALIZE = 0 ] then
+if [ $SHOULD_INITIALIZE = 0 ]
+then
 
 echo -e "\n*****\n\nUpdating classi now...\n\n*****\n"
 cd $INSTALLATION_DIRECTORY
