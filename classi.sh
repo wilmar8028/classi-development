@@ -29,14 +29,12 @@ if [ $SHOULD_INITIALIZE = 1 ]
 then
 
 
-while true; do
-  read -p "You selected initialization mode. This could potentially cause errors if you already ran it. Have you run this installation before? Answer u to just update classi. (y/u/n): " yn
+  read -p "You selected initialization mode. This could potentially cause errors if you already ran it. Have you run this installation before? Answer u to just update classi. (y/n): " yn
   case $yn in
       [Nn]* ) echo "Great! Continuing with the initialization and installation process now...";sleep 2;clear;;
       [Yy]* ) clear;exit 1;;
-      * ) echo "Please answer y/u/n";;
+      * ) echo "Please answer y/n";;
   esac
-done
 
 
 
