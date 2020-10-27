@@ -1,7 +1,7 @@
 # classi
 
 ## Attention!
-This repo is still in very early development. Please check back later if you would like to use this project.
+This repo is still in very early development. Please check back later if you would like to use this project. KNOWN ERRORS ARE PRESENT
 
 ## Usage
 If you use any of this code, please accredit the developer (@lincolnthedev). THIS CODE IS NOT AVAILABLE FOR COMMERCIAL USE UNLESS EXCLUSIVE PERMISSION IS GIVEN
