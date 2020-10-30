@@ -1,4 +1,11 @@
-# classi
+```
+         __                _ 
+   _____/ /___ ___________(_)
+  / ___/ / __ `/ ___/ ___/ / 
+ / /__/ / /_/ (__  |__  ) /  
+ \___/_/\__,_/____/____/_/   
+
+```
 
 ## Attention!
 This repo is still in very early development. Please check back later if you would like to use this project. KNOWN ERRORS ARE PRESENT
