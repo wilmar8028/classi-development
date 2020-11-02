@@ -1,12 +1,13 @@
 #
 #
-#   classi Installation Script for Raspberry Pi
+#   classi Raspberry Pi Installation Script
 #
 #
 
 # Default values of arguments
 SHOULD_INITIALIZE=0
 INSTALLATION_DIRECTORY="/var/www/html"
+OTHER_ARGUMENTS=()
 
 # Loop through arguments and process them
 for arg in "$@"
@@ -17,28 +18,33 @@ do
         shift # Remove --initialize from processing
         ;;
         -d|--directory)
-        INSTALLATION_DIRECTORY="$2"
+        ROOT_DIRECTORY="$2"
         shift # Remove argument name from processing
         shift # Remove argument value from processing
+        ;;
+        *)
+        OTHER_ARGUMENTS+=("$1")
+        shift # Remove generic argument from processing
         ;;
     esac
 done
 
-if [ $SHOULD_INITIALIZE = 1 ]
-then
+if [ $SHOULD_INITIALIZE = 1 ] then
 
 
-  # shellcheck disable=SC2162
-  read -p "You selected initialization mode. This could potentially cause errors if you already ran it. Have you run this installation before? Answer u to just update classi. (y/n): " yn
+while true; do
+  read -p "You selected initialization mode. This could potentially cause errors if you already ran it. Have you run this installation before? Answer u to just update classi. (y/u/n): " yn
   case $yn in
-      [Nn]* ) echo "Great! Continuing with the initialization and installation process now...";sleep 2;clear;;
-      [Yy]* ) clear;exit 1;;
-      * ) echo "Please answer y/n";;
+      [Yy]* ) CONTINUE=1;echo -e "/nGreat! Continuing with the initialization and installation process now...";sleep 2;clear;;
+      [Nn]* ) clear;exit 1;;
+      [Uu]* ) CONTINUE=0;SHOULD_INITIALIZE=0;clear;;
+      * ) echo "Please answer y/u/n";;
   esac
+done
 
+if [ $CONTINUE = 1 ] then
 
-
-	printf "
+	echo -e "
   ***********************
   ***********************
   ***********************
@@ -49,114 +55,111 @@ then
 
   sleep 1
 
-  printf "*** Installing Figlet ***"
+  echo -e "*** Installing Figlet ***"
   sleep 1
   apt update
   apt install figlet
   clear
 
   figlet -f slant "classi"
-  printf "\nInstallation Script for Raspberry Pi"
+  echo -e "\nInstallation Script for Raspberry Pi"
 
   sleep 5
 
   clear
 
-  printf "\n*****\n\nInstalling and Setting Up Dependencies Now...\n\n*****\n"
+  echo -e "\n*****\n\nInstalling and Setting Up Dependencies Now...\n\n*****\n"
 
   sleep 2
 
   clear
 
 
-  printf "*** Installing Git ***"
+  echo -e "*** Installing Git ***"
   sleep 1
   sudo apt update
   sudo apt install git
   clear
   
-  printf "*** Installing PHP ***"
+  echo -e "*** Installing PHP ***"
   sleep 1
   sudo apt update
   sudo apt install php-fpm
   clear
 
-  printf "*** Installing NGINX ***"
+  echo -e "*** Installing NGINX ***"
   sleep 1
   sudo apt update
   sudo apt install nginx
   clear
 
-  printf "*** Activating NGINX ***"
+  echo -e "*** Activating NGINX ***"
   sleep 1
   sudo /etc/init.d/nginx start
   clear
 
-  printf "*** Setting Hostname ***"
+  echo -e "*** Setting Hostname ***"
   sleep 1
   sudo hostname classi
   clear
   
-  printf "***** DONE INSTALLING DEPENDENCIES *****"
+  echo "***** DONE INSTALLING DEPENDENCIES *****"
 
   sleep 2
 
-  printf "***** READY TO INSTALL CLASSI *****"
+  echo "***** READY TO INSTALL CLASSI *****"
 
   sleep 2
 
   clear
 
-    # shellcheck disable=SC2162
+  while true; do
     read -p "Do you want to install classi now? (y/n): " yn
     case $yn in
         [Yy]* ) INSTALL_CLASSI=1;;
         [Nn]* ) INSTALL_CLASSI=0;;
         * ) echo "Please answer y/n";;
     esac
+done
 
 
 
 
 
-if [ $INSTALL_CLASSI = 1 ]
-then
-      printf "\n*****\n\nInstalling classi now...\n\n*****\n"
+    if [ $INSTALL_CLASSI = 1 ] then
+      echo -e "\n*****\n\nInstalling classi now...\n\n*****\n"
+      cd $INSTALLATION_DIRECTORY
       git clone https://github.com/lincolnthedev/classi
-      
-      sudo mv index.php "$INSTALLATION_DIRECTORY"
-      sudo mv head.php "$INSTALLATION_DIRECTORY"
-      
+      cd ~
       cat .bash_aliases alias classi='./classi.sh -i'
       cat .bash_aliases alias classi-update='./classi.sh'
       figlet -f slant "classi"
-      printf "\nInstallation Complete! Thank you for using classi!"
+      echo -e "\nInstallation Complete! Thank you for using classi!"
       sleep 5
       clear
       exit 1
-fi
+    fi
 
-    if [ $INSTALL_CLASSI = 0 ]
-    then
-      printf "\n*****\n\nOK, not installing classi now. Please note: you may want to install it later.\n\n*****\n"
+    if [ $INSTALL_CLASSI = 0 ] then
+      echo -e "\n*****\n\nOK, not installing classi now. Please note: you may want to install it later.\n\n*****\n"
       sleep 5
       clear
       exit 1
     fi
 
 fi
+fi
 
 
 
-if [ $SHOULD_INITIALIZE = 0 ]
-then
+if [ $SHOULD_INITIALIZE = 0 ] then
 
-printf "\n*****\n\nUpdating classi now...\n\n*****\n"
-cd "$INSTALLATION_DIRECTORY" || exit
+echo -e "\n*****\n\nUpdating classi now...\n\n*****\n"
+cd $INSTALLATION_DIRECTORY
 git pull https://github.com/lincolnthedev/classi
-cd ~ || exit
+cd ~
 figlet -f slant "classi"
-printf "\nUpdate Complete! Thank you for using classi!"
+echo -e "\nUpdate Complete! Thank you for using classi!"
 sleep 5
 clear
 exit 1
