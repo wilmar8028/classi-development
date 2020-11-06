@@ -1,7 +1,7 @@
 <?php
 echo '
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
-<style>body {font-family: 'Comfortaa', cursive;}</style>
+<style>body {font-family: Comfortaa, cursive}</style>
 <body>
 ';
 
