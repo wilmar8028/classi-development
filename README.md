@@ -14,7 +14,7 @@ The Class UI
 This repo is still in very early development. Please check back later if you would like to use this project. KNOWN ERRORS ARE PRESENT
 
 ## Contributors
-**@lincolnthedev**: Backend; Project Coordination; Bash Scripting<br>
+**@lincolnthedev**: Backend; API & OAuth2 Handling<br>
 **@wilmar8028**: Backend<br>
 **@jacobbpog**: Backend
 
