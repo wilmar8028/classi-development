@@ -3,6 +3,14 @@ require_once __DIR__.'/vendor/autoload.php';
 require 'config/config.php';
 include 'func.php';
 
+echo '
+<title>classi</title>
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<link rel="manifest" href="favicon/site.webmanifest">
+';
+
 function authuser1() {
   if(isset($_COOKIE['authuser1'])) {
     $authuser1value = '?authuser=1';
@@ -54,12 +62,8 @@ if(isset($_POST['logout'])) {
     logout($config['site-name']);
   }
 
-if(isset($_POST['authuser1'])) {
-    setcookie('authuser1', '1', time() + (86400 * 30 * 9999), "/");
-    ob_clean();
-    sleep(1);
-    echo "<center><p style='margin-top:100px'>Success! Auth user set! Returning to " . $config['site-name'] ."...</p></center>";
-    header("Refresh:3");
+  if(isset($_POST['authuser1'])) {
+    setAuthUser($config['site-name']);
   }
 
 } else {
