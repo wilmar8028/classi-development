@@ -23,16 +23,23 @@ echo '
 <body>
 ';
 
-function authuser1() {
-  if(isset($_COOKIE['authuser1'])) {
-    $authuser1value = '?authuser=1';
-    return $authuser1value;
+function authuser() {
+  if(isset($_COOKIE['authuser'])) {
+    $authuservalue = '?authuser=' . $_COOKIE['authuser'];
+    return $authuservalue;
   }
 }
 
 session_start();
 
-include 'gauthinfo.php';
+$client = new Google_Client();
+$client->setApplicationName("classi");
+$client->setAuthConfig('gcred.json');
+$client->addScope('email');
+$client->addScope('profile');
+$client->addScope(Google_Service_Classroom::CLASSROOM_COURSES_READONLY);
+$client->addScope(Google_Service_Classroom::CLASSROOM_COURSEWORK_ME);
+$client->setLoginHint($_COOKIE['auth-login-hint']);
 
 if (isset($_SESSION['access_token'])) {
   $client->setAccessToken($_SESSION['access_token']);
@@ -62,21 +69,12 @@ if (count($results->getCourses()) == 0) {
   } else {
     foreach ($results->getCourses() as $course) {
       if ( $course->getCourseState() == 'ACTIVE' ) {
-      echo '<h3><a href="' . $course->getAlternateLink() . authuser1() . '" target="_blank">' . $course->getName() . '</a> <a data-toggle="tooltip" data-html="true" title="Course ID: ' . $course->getId() . '"><i class="fa fa-info-circle"></i></a></h3>';
+      echo '<h3><a href="' . $course->getAlternateLink() . authuser() . '" target="_blank">' . $course->getName() . '</a></h3>';
     }
     }
 }
 
-echo '<br><form method="post"><input type="submit" name="logout" value="Logout"/>';
-echo '<br><br><input type="submit" name="authuser1" value="Set Auth User 1"/></form>';
-
-if(isset($_POST['logout'])) {
-    logout($config['site-name']);
-  }
-
-  if(isset($_POST['authuser1'])) {
-    setAuthUser($config['site-name']);
-  }
+echo '<a href="preferences" target="_blank"><button>Preferences</button></a>';
 
 } else {
   $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . '/vault.php';

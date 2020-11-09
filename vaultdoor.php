@@ -21,6 +21,7 @@ if (! isset($_GET['code'])) {
   $client->authenticate($_GET['code']);
   $_SESSION['access_token'] = $client->getAccessToken();
   //echo "<center><p style='margin-top:100px'>Authenticated! Returning to " . $config['site-name'] . "...</p></center>";
+  setcookie('authuser', '0', time() + (86400 * 30 * 9999), "/");
   $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . '/index.php';
   header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
 }
