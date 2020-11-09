@@ -5,10 +5,22 @@ include 'func.php';
 
 echo '
 <title>classi</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
 <link rel="manifest" href="favicon/site.webmanifest">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    body {
+        font-family: Comfortaa;
+    }
+</style>
+<body>
 ';
 
 function authuser1() {
@@ -50,7 +62,7 @@ if (count($results->getCourses()) == 0) {
   } else {
     foreach ($results->getCourses() as $course) {
       if ( $course->getCourseState() == 'ACTIVE' ) {
-      echo '<h3><a href="' . $course->getAlternateLink() . authuser1() . '" target="_blank">' . $course->getName() . '</a> (' . $course->getId() . ')</h3>';
+      echo '<h3><a href="' . $course->getAlternateLink() . authuser1() . '" target="_blank">' . $course->getName() . '</a> <a data-toggle="tooltip" data-html="true" title="Course ID: ' . $course->getId() . '"><i class="fa fa-info-circle"></i></a></h3>';
     }
     }
 }
@@ -67,6 +79,6 @@ if(isset($_POST['logout'])) {
   }
 
 } else {
-  $redirect_uri = 'https://' . $config['site-domain'] . '/vaultdoor.php';
+  $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . '/vault.php';
   header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
 }

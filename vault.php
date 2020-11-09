@@ -1,29 +1,21 @@
 <?php
+
 echo '
+<html>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
-<style>body {font-family: Comfortaa, cursive}</style>
+<style>
+    body {
+        font-family: Comfortaa;
+    }
+</style>
 <body>
 ';
 
-echo '<center style="margin-top:2rem">';
-echo '<h1>Welcome to classi!</h1>'
-echo '</center>';
+echo '<center><h1 style="font-size:100px;margin-top:1rem;"><b>classi</b></h1></center>';
 
-sleep(3);
-ob_clean();
+echo '<center><img src="resources/animations/exploding-loader.gif"></center>';
 
-echo '<center style="margin-top:2rem">';
-echo '<img src="resources/animations/exploding-loader.gif">';
-echo '</center>';
+echo '</html>';
 
-sleep(7);
-ob_clean();
-
-echo '<center style="margin-top:2rem">';
-echo '<h1 style="font-size:100px"><b>classi</b></h1>';
-echo '</center>';
-
-
-
-$redirect_uri = 'https://' . $config['site-domain'] . '/vault.php';
-header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
+$redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . '/vaultdoor.php';
+header('Refresh:7; url=' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
