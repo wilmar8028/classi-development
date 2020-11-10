@@ -98,7 +98,9 @@ if (isset($_SESSION['access_token'])) {
 
   echo '<center>';
 
-  echo '<h1 style="margin-top:2rem">' . $config['welcome-back-message'] . ' ' . $fname . '</h1>';
+  echo "<img src='classi.png' height='80px' width='80px' style='margin-top:2rem'><br><br>";
+
+  echo '<h1>' . $config['welcome-back-message'] . ' ' . $fname . '</h1>';
 
   //echo '<img src="' . $profile . '">' . '<br>' . $config['welcome-back-message'] . ' ' . $fname . '<br>' . $email . '<br>';
 

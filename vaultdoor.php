@@ -21,8 +21,10 @@ if (! isset($_GET['code'])) {
   $client->authenticate($_GET['code']);
   $_SESSION['access_token'] = $client->getAccessToken();
   //echo "<center><p style='margin-top:100px'>Authenticated! Returning to " . $config['site-name'] . "...</p></center>";
-  setcookie('authuser', '0', time() + (86400 * 30 * 9999), "/");
-  setcookie('theme', 'Light Theme', time() + (86400 * 30 * 9999), "/");
+  if ( !isset($_COOKIE['authuser']) or !isset($_COOKIE['theme']) ) {
+        setcookie('authuser', '0', time() + (86400 * 30 * 9999), "/");
+        setcookie('theme', 'Light Theme', time() + (86400 * 30 * 9999), "/");
+    }
   $google_oauth = new Google_Service_Oauth2($client);
   $google_account_info = $google_oauth->userinfo->get();
   $email =  $google_account_info->email;
