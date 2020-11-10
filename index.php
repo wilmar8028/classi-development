@@ -15,13 +15,57 @@ echo '
 <link rel="manifest" href="favicon/site.webmanifest">
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-    body {
-        font-family: Comfortaa;
-    }
-</style>
-<body>
 ';
+
+if ( isset($_COOKIE['theme']) ) {
+
+    if ( $_COOKIE['theme'] == 'Light Theme' ) {
+          echo '
+            <style>
+                body {
+                    font-family: Comfortaa;
+                }
+            </style>
+          ';
+        }
+
+    if ( $_COOKIE['theme'] == 'Dark Theme' ) {
+          echo '
+            <style>
+                body {
+                    font-family: Comfortaa;
+                    background-color: #121212;
+                    color: #cccccc;
+                }
+
+                a {
+                    color: #cccccc;
+                    text-decoration: none;
+                }
+            </style>
+          ';
+        }
+
+    if ( $_COOKIE['theme'] == 'Da Lincoln Theme' ) {
+          echo '
+            <style>
+                body {
+                    font-family: Comfortaa;
+                    background-color: #121212;
+                    color: #ffa500;
+                }
+
+                a {
+                    color: #ffa500;
+                    text-decoration: none;
+                }
+            </style>
+          ';
+        }
+
+}
+
+echo '<body>';
 
 function authuser() {
   if(isset($_COOKIE['authuser'])) {

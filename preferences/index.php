@@ -14,15 +14,60 @@ echo '
 <link rel="manifest" href="favicon/site.webmanifest">
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-    body {
-        font-family: Comfortaa;
-    }
-</style>
-<body>
 ';
 
+if ( isset($_COOKIE['theme']) ) {
+
+    if ( $_COOKIE['theme'] == 'Light Theme' ) {
+          echo '
+            <style>
+                body {
+                    font-family: Comfortaa;
+                }
+            </style>
+          ';
+        }
+
+    if ( $_COOKIE['theme'] == 'Dark Theme' ) {
+          echo '
+            <style>
+                body {
+                    font-family: Comfortaa;
+                    background-color: #121212;
+                    color: #cccccc;
+                }
+
+                a {
+                    color: #cccccc;
+                    text-decoration: none;
+                }
+            </style>
+          ';
+        }
+
+    if ( $_COOKIE['theme'] == 'Da Lincoln Theme' ) {
+          echo '
+            <style>
+                body {
+                    font-family: Comfortaa;
+                    background-color: #121212;
+                    color: #ffa500;
+                }
+
+                a {
+                    color: #ffa500;
+                    text-decoration: none;
+                }
+            </style>
+          ';
+        }
+
+}
+
+echo '<body>';
+
 echo '<center>';
+echo "<br><img src='classi.png' height='100px' width='100px'>";
 echo '<h1>classi User Preferences</h1>';
 echo '<br>';
 
@@ -32,9 +77,19 @@ echo '<br>';
 
 echo '<form method="post"><input type="submit" name="logout" value="Logout"/>';
 echo '<br><br><br>';
+echo '<u><h4>Theme</h4></u>';
+echo '<form method="post"><input type="submit" name="theme" value="Light Theme"/> ';
+echo '<form method="post"><input type="submit" name="theme" value="Dark Theme"/>';
+echo '<br><br><br>';
 echo '<u><h4>Advanced</h4></u>';
 echo '<form method="post">' . '<b>Auth User: </b>' . '<input id="authuser" name="authuser" value="' . $_COOKIE['authuser'] . '" placeholder="Auth User Number (0-3)"><input type="submit" name="authuserBtn" value="Set Auth User"/></form>';
 echo '<form method="post">' . '<b>Erase <u>ALL</u> Cookies: </b>' . '<input type="submit" name="delete-cookies" value="THIS BUTTON WILL ERASE ALL OF YOUR CLASSI SETTINGS AND INFORMATION" width="100%" max-width="100px"/>';
+
+if ( isset($_COOKIE['lincoln']) ) {
+        echo '<br><br><br>';
+        echo '<u><h4>~ Lincoln Only Experimental Features ~</h4></u>';
+        echo '<form method="post"><input type="submit" name="theme" value="Da Lincoln Theme"/>';
+    }
 
 
 
@@ -83,4 +138,9 @@ if(isset($_POST['delete-cookies-confirm'])) {
     ob_clean();
     echo "<center><p style='margin-top:100px'><img src='classi.png' height='100px' width='100px'><br>Success</p>";
     echo '<a href="/" target="_blank"><button>OK</button></a></center>';
+  }
+
+if(isset($_POST['theme'])) {
+    setcookie('theme', $_POST['theme'], time() + (86400 * 30 * 9999), "/");
+    successMessage();
   }
