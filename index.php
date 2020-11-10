@@ -120,7 +120,8 @@ if (count($results->getCourses()) == 0) {
     }
 }
 
-echo '<a href="preferences" target="_blank"><button>Preferences</button></a>';
+echo '<a href="preferences" target="_blank"><button>Preferences</button></a> ';
+echo '<a href="privacy.php" target="_blank"><button>Privacy Policy</button></a>';
 
 } else {
   $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . '/vault.php';
