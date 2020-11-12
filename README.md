@@ -11,7 +11,7 @@ The Class UI
 ```
 
 ## Attention!
-This repo is still in very early development. Please check back later if you would like to use this project. KNOWN ERRORS ARE PRESENT
+This repo is for development! DO NOT use any of its code in production!!
 
 ## Contributors
 **@lincolnthedev**: Backend; API & OAuth2 Handling<br>
