@@ -11,7 +11,7 @@ The Class UI
 ```
 
 ## Attention!
-This repo is for development! DO NOT use any of its code in production!!
+This repo is for development! DO NOT use its code in production!!
 
 ## Contributors
 **@lincolnthedev**: Backend; API & OAuth2 Handling<br>
