@@ -11,7 +11,7 @@ The Class UI
 ```
 
 ## Attention!
-This repo is for development! DO NOT use its code in production!!
+This repo is for development! DO NOT use its code in production!! The production code isn't completely working right now, but it's available [here](https://github.com/Laing-Middle-School/classi).
 
 ## Contributors
 **@lincolnthedev**: Backend; API & OAuth2 Handling<br>
